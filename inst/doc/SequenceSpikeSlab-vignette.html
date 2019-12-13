@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Tim van Erven, Steven de Rooij, Botond Szabo" />
+
+
+<title>SequenceSpikeSlab-vignette</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#header {
+text-align: center;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">SequenceSpikeSlab-vignette</h1>
+<h4 class="author">Tim van Erven, Steven de Rooij, Botond Szabo</h4>
+
+
+
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(SequenceSpikeSlab)</span></code></pre></div>
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>This package provides fast algorithms for exact Bayesian inference in the sparse normal sequence model. It implements the methods described in <span class="citation">(van Erven and Szabo 2018)</span>. Special care has been taken to make the methods scale to large data sets, and to minimize numerical errors (which arise in all software because floating point numbers are represented with finite precision).</p>
+<div id="the-sparse-normal-sequence-model" class="section level2">
+<h2>The Sparse Normal Sequence Model</h2>
+<p>In the sparse normal sequence model we get a sequence of noisy observations <span class="math inline">\(X = (X_1,\ldots,X_n)\)</span> such that <span class="math display">\[
+X_i = \theta_i + \epsilon_i, \qquad i=1,\ldots,n,
+\]</span> where the noise variables <span class="math inline">\(\epsilon_i\)</span> are assumed to be independent with distribution <span class="math inline">\(\mathcal{N}(0,\sigma)\)</span>. We are interested in the underlying means <span class="math inline">\(\theta = (\theta_1,\ldots,\theta_n)\)</span>, which are assumed to be <em>sparse</em>. This means that only <span class="math inline">\(s\)</span> of the components in <span class="math inline">\(\theta\)</span> are non-zero, with <span class="math inline">\(s\)</span> relatively small compared to <span class="math inline">\(n\)</span>.</p>
+</div>
+<div id="the-bayesian-prior" class="section level2">
+<h2>The Bayesian Prior</h2>
+<p>We consider a Bayesian model for the data, with a hierarchical prior on <span class="math inline">\(\theta\)</span> of the following form:</p>
+<ol style="list-style-type: decimal">
+<li>First, a sparsity level <span class="math inline">\(s \in \{0,1,\ldots,n\}\)</span> is chosen according to a prior <span class="math inline">\(\pi_n(s)\)</span>.</li>
+<li>Then, given <span class="math inline">\(s\)</span>, a subset of non-zero coordinates <span class="math inline">\(\mathcal{S} \subset \{0,1,\ldots,n\}\)</span> of size <span class="math inline">\(|\mathcal{S}|=s\)</span> is chosen uniformly at random.</li>
+<li>Finally, given <span class="math inline">\(s\)</span> and <span class="math inline">\(\mathcal{S}\)</span>, each non-zero mean <span class="math inline">\(\theta_i\)</span> with <span class="math inline">\(i \in \mathcal{S}\)</span> is chosen independently according to a slab prior <span class="math inline">\(G\)</span>, and all other means <span class="math inline">\(\theta_i\)</span> with <span class="math inline">\(i \not \in \mathcal{S}\)</span> are assumed to be <span class="math inline">\(0\)</span>.</li>
+</ol>
+<p>Given this structure of prior, it thus remains to choose a prior <span class="math inline">\(\pi_n\)</span> on the sparsity level and a slab prior <span class="math inline">\(G\)</span>. We assume that <span class="math inline">\(G\)</span> has a density <span class="math inline">\(g\)</span>. Out of the box, the package supports two choices of slab prior: <span class="math display">\[
+g_\lambda(\theta_i) = \frac{\lambda}{2} e^{-\lambda |\theta_i|} \qquad \text{(Laplace)}
+\]</span> <span class="math display">\[
+g_\gamma(\theta_i) =  \frac{1}{\gamma \pi (1 + (\frac{\theta_i}{\gamma})^2)} \qquad \text{(Cauchy)}
+\]</span> Advanced users may also specify their own slab priors.</p>
+<p>Theoretically motivated choices for <span class="math inline">\(\pi_n\)</span> <span class="citation">(Castillo and Vaart 2012)</span> include <span class="math display">\[
+\pi_n(s) \propto e^{-\kappa s \log(3n/s)}
+\]</span> <span class="math display">\[
+\pi_n(s) \propto \binom{2n-s}{n}^\kappa
+\]</span> for e.g. <span class="math inline">\(\kappa = 0.1\)</span> or <span class="math inline">\(\kappa = 1\)</span>.</p>
+<div id="spike-and-slab-priors" class="section level3">
+<h3>Spike-and-Slab Priors</h3>
+<p>A special case of the general class of priors described above are so-called spike-and-slab priors. Under these priors, there is a mixing hyper-parameter <span class="math inline">\(\alpha \in [0,1]\)</span> and <span class="math display">\[
+\theta_i | \alpha \sim (1-\alpha) \delta_0 + \alpha G, \qquad i=1,\ldots,n,
+\]</span></p>
+<p><span class="math display">\[
+\alpha \sim \Lambda_n.
+\]</span> This means that we need to specify a prior <span class="math inline">\(\Lambda_n\)</span> on <span class="math inline">\(\alpha\)</span>. Then, conditional on <span class="math inline">\(\alpha\)</span>, the <span class="math inline">\(\theta_i\)</span> are independently distributed. They are <span class="math inline">\(0\)</span> with probability <span class="math inline">\(1-\alpha\)</span> and they are sampled from the slab distribution <span class="math inline">\(G\)</span> with probability <span class="math inline">\(\alpha\)</span>.</p>
+<p>Spike-and-slab priors are a special case of the general hierarchical prior with <span class="math display">\[
+\pi_n(s) = \binom{n}{s} \int_0^1 \alpha^s (1-\alpha)^{n-s} d \Lambda_n(\alpha).
+\]</span></p>
+</div>
+</div>
+</div>
+<div id="package-functionality" class="section level1">
+<h1>Package Functionality</h1>
+<p>This package provides fast algorithms to calculate the marginal posterior probabilities of data points having a non-zero mean: <span class="math display">\[
+\pi_n(\theta_i \neq 0 \mid X), \qquad i=1,\ldots,n.
+\]</span> Given these, it is easy to calculate the posterior mean, which is also provided: <span class="math display">\[
+  \mathbb{E}[\theta | X] = (\mathbb{E}[\theta_i | X], \ldots, \mathbb{E}[\theta_n | X])
+\]</span></p>
+<div id="main-methods" class="section level2">
+<h2>Main Methods</h2>
+<p>There are two main methods: <em>general_sequence_model</em> and <em>fast_spike_slab_beta</em>.</p>
+<div id="general_sequence_model" class="section level3">
+<h3>general_sequence_model</h3>
+<p>This method can handle the general hierarchical prior described above. This means it requires the user to provide a choice for <span class="math inline">\(\pi_n\)</span> as input, and to specify whether the slab prior <span class="math inline">\(G\)</span> should be a Laplace or a Cauchy distribution.</p>
+<p>The run time of this method scales as <span class="math inline">\(O(n^2)\)</span> in the sample size <span class="math inline">\(n\)</span>. It has been used to handle sample sizes up to <span class="math inline">\(20\,000\)</span> within half an hour of computation time.</p>
+</div>
+<div id="fast_spike_slab_beta" class="section level3">
+<h3>fast_spike_slab_beta</h3>
+<p>This method is a faster special-purpose method for the spike-and-slab prior with <span class="math display">\[
+\Lambda_n = \text{Beta}(\kappa,\lambda)
+\]</span> This corresponds to the <em>beta-binomial</em> prior <span class="math display">\[
+\pi_n(s) \propto \frac{\Gamma(\kappa + s) \Gamma(\lambda + n - s)}{s! (n-s)!}
+\]</span> in the general hierarchical prior. This method further requires specifying whether the slab prior <span class="math inline">\(G\)</span> should be a Laplace or a Cauchy distribution.</p>
+<p>The run time of this method scales as <span class="math inline">\(O(m n^{3/2})\)</span>, where <span class="math inline">\(m\)</span> is a user-supplied parameter that controls the precision of the method. Larger values of <span class="math inline">\(m\)</span> give more precision but slow down the algorithm. The default value of <span class="math inline">\(m=20\)</span> has been seen to provide sufficient precision for data sets of different sizes. The method has been used to handle sample sizes up to <span class="math inline">\(100\,000\)</span> within half and our of computation time.</p>
+</div>
+</div>
+<div id="advanced-usage" class="section level2">
+<h2>Advanced Usage</h2>
+<p>The package is organized as a set of supporting functions in R, which wrap around two C++ functions that implement the main algorithms. The C++ function corresponding to general_sequence_model is accessible directly via <em>SSS_hierarchical_prior</em> and <em>SSS_hierarchical_prior_binomial</em>. The C++ function corresponding to fast_spike_slab_beta can be accessed via <em>SSS_discrete_spike_slab</em>. There are further supporting functions whose name starts with ‘SSS_’.</p>
+<div id="implementing-custom-slab-distributions" class="section level3">
+<h3>Implementing Custom Slab Distributions</h3>
+<p>The C++ functions do not take the data <span class="math inline">\(X\)</span> directly as input. Instead, they require two vectors <span class="math inline">\(\Phi = (\Phi_1,\ldots,\Phi_n)\)</span> and <span class="math inline">\(\Psi = (\Psi_1, \ldots, \Psi_n)\)</span> that specify the densities of the data points <span class="math inline">\(X_1,\dots,X_n\)</span> conditional on <span class="math inline">\(\theta_i\)</span> being <span class="math inline">\(0\)</span> or <span class="math inline">\(\theta_i\)</span> being distributed according to <span class="math inline">\(G\)</span>, respectively: <span class="math display">\[
+\Phi_i = \phi_\sigma(X_i)
+\]</span> <span class="math display">\[
+\Psi_i = \int_{-\infty}^\infty \phi_\sigma(X_i - \theta_i) d G(\theta_i),
+\]</span> where <span class="math inline">\(\phi_\sigma(X_i)\)</span> is the density of a Gaussian with mean <span class="math inline">\(0\)</span> and standard deviation <span class="math inline">\(\sigma\)</span>. Advanced users may implement their own slab distributions <span class="math inline">\(G\)</span> by calculating the <span class="math inline">\(\Psi\)</span> vector themselves.</p>
+</div>
+</div>
+</div>
+<div id="references" class="section level1">
+<h1 class="unnumbered">References</h1>
+<div id="refs" class="references hanging-indent">
+<div id="ref-castillo2012">
+<p>Castillo, Ismaël, and Aad van der Vaart. 2012. “Needles and Straw in a Haystack: Posterior Concentration for Possibly Sparse Sequences.” <em>Ann. Statist.</em> 40 (4): 2069–2101. <a href="https://doi.org/10.1214/12-AOS1029">https://doi.org/10.1214/12-AOS1029</a>.</p>
+</div>
+<div id="ref-VanErvenSzabo2018">
+<p>van Erven, Tim, and Botond Szabo. 2018. “Fast Exact Bayesian Inference for Sparse Signals in the Normal Sequence Model.” <em>ArXiv:1810.10883 Preprint</em>.</p>
+</div>
+</div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
