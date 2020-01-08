@@ -2,7 +2,7 @@ Package: SequenceSpikeSlab
 Type: Package
 Title: Exact Bayesian Model Selection Methods for the Sparse Normal
         Sequence Model
-Version: 0.1
+Version: 0.1.1
 Authors@R: c(
     person("Steven", "de Rooij", email = "steven.de.rooij@gmail.com", role = c("cre", "aut")),
     person("Tim", "van Erven", email = "tim@timvanerven.nl", role = "aut"),
@@ -28,6 +28,6 @@ Encoding: UTF-8
 Suggests: knitr, rmarkdown
 VignetteBuilder: knitr
 NeedsCompilation: yes
-Packaged: 2019-12-04 21:14:26 UTC; tve
+Packaged: 2019-12-26 12:48:51 UTC; rooijsde
 Repository: CRAN
-Date/Publication: 2019-12-13 14:20:12 UTC
+Date/Publication: 2020-01-08 10:40:02 UTC

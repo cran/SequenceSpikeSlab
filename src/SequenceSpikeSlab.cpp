@@ -40,7 +40,7 @@ std::vector<std::vector<double> > precompute_joint_p(NumericVector logprior, Pro
   for (int k = 1; k <= n/2.0; k++) {
     if (logprior[k] != logprior[k]) stop("logprior contains NaNs!\n");
     if (divideByBinom) { 
-      logcnk = logcnk + log(n-k+1) - log(k);
+      logcnk = logcnk + log(n-k+1.0) - log((double)k);
       jointp[n-1][k] = logprior[k] - logcnk;
       jointp[n-1][n-k] = logprior[n-k] - logcnk;
     } else {

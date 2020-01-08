@@ -161,6 +161,6 @@ $$
 \Psi_i = \int_{-\infty}^\infty \phi_\sigma(X_i - \theta_i) d G(\theta_i),
 $$
 where $\phi_\sigma(X_i)$ is the density of a Gaussian with mean $0$ and standard deviation $\sigma$.
-Advanced users may implement their own slab distributions $G$ by calculating the $\Psi$ vector themselves.
+Advanced users may implement their own slab distributions $G$ by calculating the $\Psi$ vector themselves. Custom values for $\Phi$ and $\Psi$ may also be used to model non-Gaussian noise or to incorporate into $\Phi$ a shrinkage prior rather than a point-mass at zero.
 
 # References
