@@ -4,14 +4,19 @@ citEntry(entry = "Article",
   title        = "Fast Exact Bayesian Inference for Sparse Signals in the Normal Sequence Model",
   author       = personList(as.person("Tim van Erven"),
                    as.person("Botond Szabo")),
-  journal      = "arXiv preprint",
-  year         = "2018",
-  url          = "https://arxiv.org/abs/1810.10883",
+  journal      = "Bayesian Analysis",
+  year         = "2021",
+  volume       = "16",
+  number       = "3",
+  publisher    = "International Society for Bayesian Analysis",
+  pages        = "933--960",
+  doi          = "10.1214/20-BA1227",
+  url          = "https://doi.org/10.1214/20-BA1227",
   
   textVersion  =
-  paste("Tim van Erven, Botond Szabo (2018).",
+  paste("Tim van Erven, Botond Szabo (2021).",
         "Fast Exact Bayesian Inference for Sparse Signals in the Normal Sequence Model.",
-        "ArXiv preprint.",
-        "URL https://arxiv.org/abs/1810.10883.")
+        "Bayesian Analysis, 16(3), 933-960.",
+        "URL https://doi.org/10.1214/20-BA1227.")
 )
 

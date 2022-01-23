@@ -1,6 +1,7 @@
 # Make Roxygen add appropriate references for Rcpp when generating NAMESPACE
 #' @useDynLib SequenceSpikeSlab
 #' @importFrom Rcpp sourceCpp
+#' @import RcppProgress
 NULL
 
 # Add main documentation page for the whole package

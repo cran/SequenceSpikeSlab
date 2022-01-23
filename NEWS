@@ -1,3 +1,12 @@
+SequenceSpikeSlab v1.0.0 (Release date: 2022-01-23)
+==============
+
+* Bump version number to signal stable release
+* Reference published version of Van Erven and Szabo paper in Bayesian
+  Analysis
+* Fix R CMD check warning about not importing namespace from RcppProgress
+* Switch maintainer
+
 SequenceSpikeSlab v0.1.1 (Release date: 2019-12-17)
 ==============
 

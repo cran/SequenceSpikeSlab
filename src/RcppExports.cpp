@@ -5,6 +5,11 @@
 
 using namespace Rcpp;
 
+#ifdef RCPP_USE_GLOBAL_ROSTREAM
+Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
+Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
+#endif
+
 // HierarchicalPriorC
 NumericVector HierarchicalPriorC(NumericVector logphi, NumericVector logpsi, NumericVector logprior, bool showProgress, bool divideByBinom);
 RcppExport SEXP _SequenceSpikeSlab_HierarchicalPriorC(SEXP logphiSEXP, SEXP logpsiSEXP, SEXP logpriorSEXP, SEXP showProgressSEXP, SEXP divideByBinomSEXP) {

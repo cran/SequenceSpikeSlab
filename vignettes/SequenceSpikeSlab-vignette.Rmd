@@ -24,7 +24,7 @@ library(SequenceSpikeSlab)
 
 This package provides fast algorithms for exact Bayesian inference in the
 sparse normal sequence model. It implements the methods described in
-[@VanErvenSzabo2018]. Special care has been taken to make the methods scale
+[@VanErvenSzabo2021]. Special care has been taken to make the methods scale
 to large data sets, and to minimize numerical errors (which arise in all
 software because floating point numbers are represented with finite precision).
 
