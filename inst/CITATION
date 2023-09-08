@@ -1,9 +1,8 @@
 citHeader("To cite SequenceSpikeSlab in publications use:")
 
-citEntry(entry = "Article",
+bibentry(bibtype = "Article",
   title        = "Fast Exact Bayesian Inference for Sparse Signals in the Normal Sequence Model",
-  author       = personList(as.person("Tim van Erven"),
-                   as.person("Botond Szabo")),
+  author       = c(person("Tim", "van Erven"), person("Botond", "Szabo")),
   journal      = "Bayesian Analysis",
   year         = "2021",
   volume       = "16",

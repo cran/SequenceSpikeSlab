@@ -2,11 +2,11 @@ Package: SequenceSpikeSlab
 Type: Package
 Title: Exact Bayesian Model Selection Methods for the Sparse Normal
         Sequence Model
-Version: 1.0.0
+Version: 1.0.1
 Authors@R: c(
     person("Steven", "de Rooij", email = "steven.de.rooij@gmail.com", role = "aut"),
     person("Tim", "van Erven", email = "tim@timvanerven.nl", role = c("cre", "aut")),
-    person("Botond", "Szabo", email = "b.t.szabo@math.leidenuniv.nl", role = "aut"))
+    person("Botond", "Szabo", email = "botond.szabo@unibocconi.it", role = "aut"))
 Author: Steven de Rooij [aut],
   Tim van Erven [cre, aut],
   Botond Szabo [aut]
@@ -25,11 +25,11 @@ License: GPL (>= 2)
 Imports: Rcpp (>= 0.12.18), RcppProgress (>= 0.4.1), selectiveInference
         (>= 1.2.5)
 LinkingTo: Rcpp, RcppProgress
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.3
 Encoding: UTF-8
 Suggests: knitr, rmarkdown
 VignetteBuilder: knitr
 NeedsCompilation: yes
-Packaged: 2022-01-23 11:39:03 UTC; tve
+Packaged: 2023-09-08 12:29:47 UTC; tve
 Repository: CRAN
-Date/Publication: 2022-01-23 15:22:44 UTC
+Date/Publication: 2023-09-08 12:50:02 UTC
